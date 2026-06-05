@@ -41,7 +41,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           <ProductPurchasePanel product={product} />
           <div className="mt-8 grid gap-4 text-sm text-ink/68">
             <p className="flex gap-3"><Truck size={18} className="text-copper" /> Envio calculado no checkout.</p>
-            <p className="flex gap-3"><HeartHandshake size={18} className="text-copper" /> 10% desta compra sera destinado a uma paroquia local.</p>
+            <p className="flex gap-3"><HeartHandshake size={18} className="text-copper" /> 10% do lucro desta compra vai para um dos 3 projetos sociais — voce escolhe no checkout.</p>
           </div>
         </div>
       </section>

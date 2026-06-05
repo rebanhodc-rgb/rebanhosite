@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Navbar } from "@/frontend/components/brand/navbar";
 import { Confetti, type ConfettiRef } from "@/frontend/components/ui/confetti";
 import { Button } from "@/frontend/components/ui/button";
 
-export default function SucessoPage() {
+function SucessoContent() {
   const confettiRef = useRef<ConfettiRef>(null);
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
@@ -34,5 +34,13 @@ export default function SucessoPage() {
         className="pointer-events-none fixed inset-0 z-50 h-full w-full"
       />
     </main>
+  );
+}
+
+export default function SucessoPage() {
+  return (
+    <Suspense fallback={null}>
+      <SucessoContent />
+    </Suspense>
   );
 }

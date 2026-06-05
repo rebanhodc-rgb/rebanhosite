@@ -3,7 +3,7 @@
 ## Project Overview
 
 Next.js 14 e-commerce site for the REBANHO brand (Catholic lifestyle apparel).
-Launch date: 31 May 2026.
+Launch date: 1 August 2026.
 
 ## Architecture
 

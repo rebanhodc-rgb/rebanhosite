@@ -67,36 +67,6 @@ export function CepFields({ values, onChange, errors, className }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [digits]);
 
-  function Field({
-    label,
-    fieldKey,
-    placeholder,
-    maxLength,
-    className: fieldClassName,
-  }: {
-    label: string;
-    fieldKey: keyof AddressValues;
-    placeholder?: string;
-    maxLength?: number;
-    className?: string;
-  }) {
-    return (
-      <div className={fieldClassName}>
-        <label className={LABEL_CLASS}>{label}</label>
-        <input
-          value={values[fieldKey]}
-          onChange={(e) => onChange({ ...values, [fieldKey]: e.target.value })}
-          placeholder={placeholder}
-          maxLength={maxLength}
-          className={INPUT_CLASS}
-        />
-        {errors?.[fieldKey] && (
-          <p className="mt-1 text-xs text-red-500">{errors[fieldKey]}</p>
-        )}
-      </div>
-    );
-  }
-
   return (
     <div className={className}>
       {/* CEP */}
@@ -125,8 +95,18 @@ export function CepFields({ values, onChange, errors, className }: Props) {
 
       {/* Logradouro + Número */}
       <div className="grid gap-4 sm:grid-cols-[1fr_auto]">
-        <Field label="Logradouro" fieldKey="street" placeholder="Rua, Av., etc." />
-        {/* Número — inlined to allow ref forwarding without forwardRef */}
+        <div>
+          <label className={LABEL_CLASS}>Logradouro</label>
+          <input
+            value={values.street}
+            onChange={(e) => onChange({ ...values, street: e.target.value })}
+            placeholder="Rua, Av., etc."
+            className={INPUT_CLASS}
+          />
+          {errors?.street && (
+            <p className="mt-1 text-xs text-red-500">{errors.street}</p>
+          )}
+        </div>
         <div className="w-28">
           <label className={LABEL_CLASS}>Número</label>
           <input
@@ -144,24 +124,57 @@ export function CepFields({ values, onChange, errors, className }: Props) {
 
       {/* Complemento + Bairro */}
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <Field
-          label="Complemento (opcional)"
-          fieldKey="complement"
-          placeholder="Apto, Bloco…"
-        />
-        <Field label="Bairro" fieldKey="neighborhood" />
+        <div>
+          <label className={LABEL_CLASS}>Complemento (opcional)</label>
+          <input
+            value={values.complement}
+            onChange={(e) => onChange({ ...values, complement: e.target.value })}
+            placeholder="Apto, Bloco…"
+            className={INPUT_CLASS}
+          />
+          {errors?.complement && (
+            <p className="mt-1 text-xs text-red-500">{errors.complement}</p>
+          )}
+        </div>
+        <div>
+          <label className={LABEL_CLASS}>Bairro</label>
+          <input
+            value={values.neighborhood}
+            onChange={(e) => onChange({ ...values, neighborhood: e.target.value })}
+            className={INPUT_CLASS}
+          />
+          {errors?.neighborhood && (
+            <p className="mt-1 text-xs text-red-500">{errors.neighborhood}</p>
+          )}
+        </div>
       </div>
 
       {/* Cidade + UF */}
       <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_auto]">
-        <Field label="Cidade" fieldKey="city" />
-        <Field
-          label="UF"
-          fieldKey="state"
-          maxLength={2}
-          placeholder="SP"
-          className="w-20"
-        />
+        <div>
+          <label className={LABEL_CLASS}>Cidade</label>
+          <input
+            value={values.city}
+            onChange={(e) => onChange({ ...values, city: e.target.value })}
+            className={INPUT_CLASS}
+          />
+          {errors?.city && (
+            <p className="mt-1 text-xs text-red-500">{errors.city}</p>
+          )}
+        </div>
+        <div className="w-20">
+          <label className={LABEL_CLASS}>UF</label>
+          <input
+            value={values.state}
+            onChange={(e) => onChange({ ...values, state: e.target.value })}
+            maxLength={2}
+            placeholder="SP"
+            className={INPUT_CLASS}
+          />
+          {errors?.state && (
+            <p className="mt-1 text-xs text-red-500">{errors.state}</p>
+          )}
+        </div>
       </div>
     </div>
   );

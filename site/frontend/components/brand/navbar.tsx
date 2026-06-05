@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Search, ShoppingBag } from "lucide-react";
 import { CartCount } from "@/frontend/components/cart/cart-count";
 import { MobileMenu } from "@/frontend/components/brand/mobile-menu";
-import { CardNav } from "@/frontend/components/brand/card-nav";
 import { NavAuth } from "@/frontend/components/account/nav-auth";
 
 export function Navbar({ dark = false }: { dark?: boolean }) {
@@ -17,7 +16,6 @@ export function Navbar({ dark = false }: { dark?: boolean }) {
           <Link href="/proposito">Proposito</Link>
           <Link href="/experiencia">Experiencia</Link>
           <Link href="/sobre">Sobre</Link>
-          <CardNav dark={dark} />
         </nav>
         <div className="flex items-center gap-2">
           <Link aria-label="Buscar" href="/loja" className="rounded-full p-2 transition hover:bg-current/10">

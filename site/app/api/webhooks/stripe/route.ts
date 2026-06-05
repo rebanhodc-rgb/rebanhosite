@@ -56,7 +56,7 @@ export async function POST(req: Request) {
           customerEmail: order.customerEmail,
           total: Number(order.total),
           donationAmount: Number(order.donationAmount),
-          parishName: order.parishName ?? "",
+          projectName: order.projectName ?? order.parishName ?? "",
           items: order.items.map((item) => ({
             name: item.product.name,
             quantity: item.quantity,

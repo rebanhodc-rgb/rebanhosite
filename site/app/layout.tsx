@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, Manrope } from "next/font/google";
+import { Cormorant_Garamond, Plus_Jakarta_Sans, Manrope } from "next/font/google";
 import { Providers } from "@/frontend/components/brand/providers";
 import "./globals.css";
 
@@ -15,7 +15,7 @@ const subtitle = Manrope({
   variable: "--font-subtitle"
 });
 
-const body = Inter({
+const body = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-body"

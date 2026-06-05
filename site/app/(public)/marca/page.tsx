@@ -57,7 +57,7 @@ export default function BrandHomePage() {
           {[
             [Leaf, "Significado", "Cada detalhe carrega um proposito."],
             [Box, "Experiencia", "Mais que uma compra, um momento."],
-            [Church, "Impacto real", "10% de cada venda para sua paroquia local."],
+            [Church, "Impacto real", "10% do lucro de cada venda para um dos 3 projetos sociais."],
             [Heart, "Para todos", "Design sutil que fala com todos."]
           ].map(([Icon, title, text]) => (
             <div key={title as string} className="flex items-center gap-5 border-ink/10 md:border-l md:pl-8 md:first:border-l-0">

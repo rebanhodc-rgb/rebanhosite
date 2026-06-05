@@ -12,7 +12,7 @@ export type OrderEmailData = {
   customerEmail: string;
   total: number;
   donationAmount: number;
-  parishName: string;
+  projectName: string;
   items: OrderEmailItem[];
 };
 
@@ -27,7 +27,7 @@ export function orderConfirmationHtml(order: OrderEmailData) {
       <p>Ola, ${order.customerName}. Recebemos seu pedido <strong>${order.orderId}</strong>.</p>
       <ul>${itemsList(order.items)}</ul>
       <p><strong>Total:</strong> ${brl(order.total)}</p>
-      <p><strong>Doacao reservada:</strong> ${brl(order.donationAmount)} para ${order.parishName}.</p>
+      <p><strong>Doacao reservada:</strong> ${brl(order.donationAmount)} para ${order.projectName}.</p>
       <p>Voce recebera novas atualizacoes quando o pagamento e envio forem confirmados.</p>
     </div>
   `;
@@ -41,7 +41,7 @@ export function adminOrderNotificationHtml(order: OrderEmailData) {
       <p><strong>Cliente:</strong> ${order.customerName} (${order.customerEmail})</p>
       <ul>${itemsList(order.items)}</ul>
       <p><strong>Total:</strong> ${brl(order.total)}</p>
-      <p><strong>Doacao:</strong> ${brl(order.donationAmount)} para ${order.parishName}</p>
+      <p><strong>Doacao:</strong> ${brl(order.donationAmount)} para ${order.projectName}</p>
     </div>
   `;
 }

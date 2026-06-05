@@ -1,8 +1,12 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { AdminShell } from "@/frontend/components/admin/admin-shell";
+import { DonationSettingsForm } from "@/frontend/components/admin/donation-settings-form";
 import { authOptions } from "@/backend/lib/auth";
 import { isAdmin } from "@/backend/services/permissions";
+import { getDonationParams } from "@/backend/services/donation";
+
+export const dynamic = "force-dynamic";
 
 const ENV_GROUPS = [
   {
@@ -35,11 +39,22 @@ const ENV_GROUPS = [
 
 export default async function AdminConfiguracoesPage() {
   const session = await getServerSession(authOptions);
-  if (!isAdmin((session?.user as any)?.role)) redirect("/minha-conta");
+  if (!isAdmin((session?.user as { role?: string } | undefined)?.role)) redirect("/minha-conta");
+
+  const params = await getDonationParams();
 
   return (
     <AdminShell title="Configurações">
       <div className="space-y-6">
+        <DonationSettingsForm
+          initial={{
+            unitCost: params.unitCost,
+            taxPercent: Number((params.taxRate * 100).toFixed(2)),
+            feePercent: Number((params.feeRate * 100).toFixed(2)),
+            fixedFee: params.fixedFee,
+            donationPercent: Number((params.donationRate * 100).toFixed(2))
+          }}
+        />
         {ENV_GROUPS.map(({ group, vars }) => (
           <div key={group} className="rounded-lg border border-ink/10 bg-white/65 p-6">
             <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-ink/50">{group}</h2>

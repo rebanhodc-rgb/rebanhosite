@@ -66,13 +66,17 @@ async function main() {
     }
   }
 
-  await prisma.parish.createMany({
-    data: [
-      { name: "Paroquia Sao Jose", city: "Sao Paulo", state: "SP", cepRangeStart: "01000000", cepRangeEnd: "05999999", active: true },
-      { name: "Paroquia Nossa Senhora da Paz", city: "Rio de Janeiro", state: "RJ", cepRangeStart: "20000000", cepRangeEnd: "28999999", active: true },
-      { name: "Paroquia Nossa Senhora da Luz", city: "Curitiba", state: "PR", cepRangeStart: "80000000", cepRangeEnd: "82999999", active: true }
-    ],
-    skipDuplicates: true
+  await prisma.donationSettings.upsert({
+    where: { id: "singleton" },
+    update: {},
+    create: {
+      id: "singleton",
+      unitCost: new Prisma.Decimal("49.00"),
+      taxRate: new Prisma.Decimal("0.0600"),
+      feeRate: new Prisma.Decimal("0.0399"),
+      fixedFee: new Prisma.Decimal("0.39"),
+      donationRate: new Prisma.Decimal("0.1000")
+    }
   });
 }
 

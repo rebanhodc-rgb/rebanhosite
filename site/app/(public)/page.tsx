@@ -29,7 +29,7 @@ const cards = [
   {
     id: 4,
     title: "O gesto",
-    caption: "10% para uma comunidade local",
+    caption: "10% do lucro para 3 projetos sociais",
     image: "/images/rebanho-tipografia-etiqueta.png"
   }
 ];
@@ -51,7 +51,7 @@ export default function LaunchPage() {
 
       <section className="relative z-10 mx-auto grid h-[calc(100dvh-56px)] w-[min(1240px,calc(100%_-_32px))] items-center gap-5 pb-3 sm:h-[calc(100dvh-64px)] lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.78fr)] lg:gap-14 lg:pb-5">
         <div className="min-w-0">
-          <p className="subtitle text-[10px] font-bold uppercase leading-4 tracking-[0.28em] text-gold/78 sm:text-xs sm:tracking-[0.32em]">Lancamento oficial em 31 de maio de 2026</p>
+          <p className="subtitle text-[10px] font-bold uppercase leading-4 tracking-[0.28em] text-gold/78 sm:text-xs sm:tracking-[0.32em]">Lancamento oficial em 1 de agosto de 2026</p>
           <h1 className="serif mt-3 max-w-5xl text-[clamp(2.35rem,12vw,4.2rem)] leading-[0.9] tracking-[0.02em] sm:mt-4 sm:text-[clamp(3.2rem,7vw,4.5rem)] lg:mt-4">
             <LustreText text="Elas ouvirao a minha voz, e havera um so rebanho e um so pastor." />
           </h1>

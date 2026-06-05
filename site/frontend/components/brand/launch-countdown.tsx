@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-const launchDate = new Date("2026-05-31T20:00:00-03:00");
+const launchDate = new Date("2026-08-01T00:00:00-03:00");
 
 function diff() {
   const distance = Math.max(0, launchDate.getTime() - Date.now());

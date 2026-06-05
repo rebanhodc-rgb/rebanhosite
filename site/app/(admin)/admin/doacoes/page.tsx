@@ -30,7 +30,7 @@ export default async function AdminDoacoesPage() {
           <table className="w-full text-sm">
             <thead className="bg-ink/5 text-ink/70">
               <tr>
-                <th className="px-4 py-3 text-left font-medium">Paroquia</th>
+                <th className="px-4 py-3 text-left font-medium">Projeto</th>
                 <th className="px-4 py-3 text-left font-medium">Cidade / UF</th>
                 <th className="px-4 py-3 text-left font-medium">Valor</th>
                 <th className="px-4 py-3 text-left font-medium">Status</th>
@@ -41,7 +41,7 @@ export default async function AdminDoacoesPage() {
             <tbody className="divide-y divide-ink/10">
               {donations.map((donation) => (
                 <tr key={donation.id} className="hover:bg-ink/5">
-                  <td className="px-4 py-3 font-medium">{donation.parishName}</td>
+                  <td className="px-4 py-3 font-medium">{donation.projectName ?? donation.parishName}</td>
                   <td className="px-4 py-3 text-ink/60">{donation.city} / {donation.state}</td>
                   <td className="px-4 py-3">R$ {Number(donation.amount).toFixed(2).replace(".", ",")}</td>
                   <td className="px-4 py-3">
