@@ -19,9 +19,9 @@ export const products: Product[] = [
     slug: "camiseta-cordis",
     price: 149,
     category: "Camisetas",
-    line: "Fe que transforma",
-    description: "Algodao premium em preto profundo, detalhe minimalista em dourado envelhecido.",
-    symbolicMeaning: "Cordis remete ao coracao como lugar de conversao, memoria e entrega.",
+    line: "Fé que transforma",
+    description: "Algodão premium em preto profundo, detalhe minimalista em dourado envelhecido.",
+    symbolicMeaning: "Cordis remete ao coração como lugar de conversão, memória e entrega.",
     images: [
       "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1200&q=85",
       "https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=1200&q=85"
@@ -37,7 +37,7 @@ export const products: Product[] = [
     category: "Camisetas",
     line: "O cordeiro de Deus",
     description: "Malha cru com estampa discreta do cordeiro, feita para um visual leve e contemplativo.",
-    symbolicMeaning: "Agnus aponta para mansidao e sacrificio, em uma leitura sutil e elegante.",
+    symbolicMeaning: "Agnus aponta para mansidão e sacrifício, em uma leitura sutil e elegante.",
     images: [
       "https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=1200&q=85",
       "https://images.unsplash.com/photo-1523398002811-999ca8dec234?auto=format&fit=crop&w=1200&q=85"
@@ -51,9 +51,9 @@ export const products: Product[] = [
     slug: "camiseta-fides",
     price: 149,
     category: "Camisetas",
-    line: "Fe que move montanhas",
-    description: "Verde profundo, acabamento lavado e simbolo tonal com leitura de brasao.",
-    symbolicMeaning: "Fides celebra a fe como movimento silencioso, constancia e coragem.",
+    line: "Fé que move montanhas",
+    description: "Verde profundo, acabamento lavado e símbolo tonal com leitura de brasão.",
+    symbolicMeaning: "Fides celebra a fé como movimento silencioso, constância e coragem.",
     images: [
       "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=1200&q=85",
       "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=85"
@@ -68,7 +68,7 @@ export const products: Product[] = [
     price: 149,
     category: "Camisetas",
     line: "A verdade liberta",
-    description: "Preto premium com lettering serifado, cruz discreta e caimento contemporaneo.",
+    description: "Preto premium com lettering serifado, cruz discreta e caimento contemporâneo.",
     symbolicMeaning: "Veritas lembra a verdade que liberta sem precisar gritar para ser reconhecida.",
     images: [
       "https://images.unsplash.com/photo-1516257984-b1b4d707412e?auto=format&fit=crop&w=1200&q=85",

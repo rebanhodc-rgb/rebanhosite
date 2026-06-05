@@ -33,13 +33,13 @@ export default async function AdminPage() {
       <div className="grid gap-4 md:grid-cols-4">
         <AdminMetricCard label="Receita" value={brl(revenue)} hint="Total de pedidos no banco." />
         <AdminMetricCard label="Pedidos" value={String(orders.length)} hint="Pedidos criados pelo checkout." />
-        <AdminMetricCard label="Doacao total" value={brl(donationsTotal)} hint="10% do lucro liquido acumulado." />
-        <AdminMetricCard label="Leads" value={String(leads)} hint="Cadastros do pre-lancamento." />
-        <AdminMetricCard label="A repassar" value={brl(toTransfer)} hint="Reservado/pendente, ainda nao enviado." />
-        <AdminMetricCard label="Ja repassado" value={brl(transferred)} hint="Doacoes com status repassado." />
+        <AdminMetricCard label="Doação total" value={brl(donationsTotal)} hint="10% do lucro líquido acumulado." />
+        <AdminMetricCard label="Leads" value={String(leads)} hint="Cadastros do pré-lançamento." />
+        <AdminMetricCard label="A repassar" value={brl(toTransfer)} hint="Reservado/pendente, ainda não enviado." />
+        <AdminMetricCard label="Já repassado" value={brl(transferred)} hint="Doações com status repassado." />
       </div>
 
-      <h2 className="serif mt-12 text-3xl">Doacao por projeto</h2>
+      <h2 className="serif mt-12 text-3xl">Doação por projeto</h2>
       <div className="mt-5 grid gap-4 md:grid-cols-3">
         {byProject.map((project) => (
           <div key={project.id} className="rounded-2xl border border-ink/10 bg-white/65 p-5">
@@ -47,7 +47,7 @@ export default async function AdminPage() {
             <h3 className="serif mt-3 text-xl leading-tight">{project.name}</h3>
             <p className="text-xs text-ink/50">{project.cause}</p>
             <p className="serif mt-4 text-3xl">{brl(project.total)}</p>
-            <p className="text-xs text-ink/50">{project.count} doacao(oes) destinada(s)</p>
+            <p className="text-xs text-ink/50">{project.count} doação(ões) destinada(s)</p>
           </div>
         ))}
       </div>

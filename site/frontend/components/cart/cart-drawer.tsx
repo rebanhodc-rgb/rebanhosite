@@ -11,7 +11,7 @@ export function CartSummary({ items }: { items: Array<{ price: number; quantity:
         <strong>{brl(total)}</strong>
       </div>
       <div className="mt-3 flex justify-between text-sm text-copper">
-        <span>Doacao estimada</span>
+        <span>Doação estimada</span>
         <strong>{brl(total * 0.1)}</strong>
       </div>
     </div>

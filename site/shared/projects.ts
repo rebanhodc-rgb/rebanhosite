@@ -10,37 +10,37 @@ export type DonationProject = {
 };
 
 /**
- * Os tres projetos sociais que recebem a doacao da REBANHO.
- * Fonte unica de verdade, usada pelo checkout, paginas publicas e admin.
+ * Os três projetos sociais que recebem a doação da REBANHO.
+ * Fonte única de verdade, usada pelo checkout, páginas públicas e admin.
  */
 export const donationProjects: DonationProject[] = [
   {
     id: "vicentinos-frei-galvao",
     name: "Vicentinos",
-    org: "SSVP — Paroquia Sao Frei Galvao",
-    city: "Lago Norte, Brasilia",
+    org: "SSVP — Paróquia São Frei Galvão",
+    city: "Lago Norte, Brasília",
     state: "DF",
-    cause: "Familias em vulnerabilidade",
+    cause: "Famílias em vulnerabilidade",
     description:
-      "A Sociedade de Sao Vicente de Paulo da comunidade Frei Galvao leva alimento, escuta e amparo a familias do Taquari, no Lago Norte.",
+      "A Sociedade de São Vicente de Paulo da comunidade Frei Galvão leva alimento, escuta e amparo a famílias do Taquari, no Lago Norte.",
     accent: "#6E8D81"
   },
   {
     id: "abrace",
     name: "ABRACE",
-    org: "Assistencia a familias de criancas com cancer",
-    city: "Brasilia",
+    org: "Assistência a famílias de crianças com câncer",
+    city: "Brasília",
     state: "DF",
-    cause: "Criancas com cancer",
+    cause: "Crianças com câncer",
     description:
-      "A ABRACE acolhe criancas e adolescentes em tratamento de cancer e doencas do sangue, sustentando tambem suas familias durante o cuidado.",
+      "A ABRACE acolhe crianças e adolescentes em tratamento de câncer e doenças do sangue, sustentando também suas famílias durante o cuidado.",
     accent: "#8B3E2F"
   },
   {
     id: "lar-dos-idosos",
     name: "Crevin Lar dos Idosos",
-    org: "Acolhimento de longa permanencia",
-    city: "Brasilia",
+    org: "Acolhimento de longa permanência",
+    city: "Brasília",
     state: "DF",
     cause: "Dignidade na terceira idade",
     description:

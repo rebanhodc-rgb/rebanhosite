@@ -42,7 +42,7 @@ export async function calculateShipping(params: ShippingParams): Promise<Shippin
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.MELHOR_ENVIO_TOKEN}`,
-        "User-Agent": "REBANHO/1.0 (andrebomdesouza6@gmail.com)",
+        "User-Agent": "REBANHO/1.0 (contato@rebanhodc.com.br)",
       },
       body: JSON.stringify(body),
     });

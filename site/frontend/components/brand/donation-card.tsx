@@ -3,18 +3,18 @@ import { Receipt, HandHeart, BarChart3 } from "lucide-react";
 const PILLARS = [
   {
     icon: Receipt,
-    title: "10% do lucro liquido",
-    text: "Calculamos sobre o lucro real do pedido — depois de custos de producao, impostos e taxas."
+    title: "10% do lucro líquido",
+    text: "Calculamos sobre o lucro real do pedido — depois de custos de produção, impostos e taxas."
   },
   {
     icon: HandHeart,
-    title: "Voce escolhe o projeto",
+    title: "Você escolhe o projeto",
     text: "No checkout, sua compra apoia os Vicentinos, a ABRACE ou o Crevin Lar dos Idosos."
   },
   {
     icon: BarChart3,
-    title: "Repasse rastreavel",
-    text: "Cada doacao e registrada e acompanhada por projeto: reservado, pendente e repassado."
+    title: "Repasse rastreável",
+    text: "Cada doação é registrada e acompanhada por projeto: reservado, pendente e repassado."
   }
 ] as const;
 

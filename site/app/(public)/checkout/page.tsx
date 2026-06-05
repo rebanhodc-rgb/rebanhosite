@@ -75,7 +75,7 @@ export default function CheckoutPage() {
       return;
     }
     setLoading(false);
-    setError("Nao foi possivel finalizar: confira os dados e tente novamente.");
+    setError("Não foi possível finalizar: confira os dados e tente novamente.");
   }
 
   return (
@@ -111,7 +111,7 @@ export default function CheckoutPage() {
           </CheckoutStep>
           <CheckoutStep number="3" title="Projeto apoiado">
             <p className="mb-4 text-sm text-ink/60">
-              {brl(donation)} desta compra (10% do lucro liquido) serao destinados ao projeto que voce escolher.
+              {brl(donation)} desta compra (10% do lucro líquido) serão destinados ao projeto que você escolher.
             </p>
             <div className="grid gap-3">
               {donationProjects.map((project) => {
@@ -147,7 +147,7 @@ export default function CheckoutPage() {
             </div>
           </CheckoutStep>
           <CheckoutStep number="4" title="Pagamento">
-            <div className="rounded-lg border border-ink/10 p-4 text-sm text-ink/65">Pedido registrado com reserva de doacao e emails transacionais. O pagamento seguro e concluido no gateway.</div>
+            <div className="rounded-lg border border-ink/10 p-4 text-sm text-ink/65">Pedido registrado com reserva de doação e e-mails transacionais. O pagamento seguro é concluído no gateway.</div>
           </CheckoutStep>
         </div>
         <aside className="order-first rounded-[1.6rem] border border-ink/10 bg-white/65 p-6 md:order-none md:h-fit md:sticky md:top-24">
@@ -171,7 +171,7 @@ export default function CheckoutPage() {
               <strong>{brl(displayTotal)}</strong>
             </div>
             <div className="flex justify-between text-copper text-sm">
-              <span>Doacao (10% do lucro)</span>
+              <span>Doação (10% do lucro)</span>
               <strong>{brl(donation)}</strong>
             </div>
             {selectedProject ? (

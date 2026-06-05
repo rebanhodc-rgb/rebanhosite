@@ -22,7 +22,7 @@ function SucessoContent() {
       <div className="container-x flex flex-col items-center gap-6 py-24 text-center">
         <h1 className="serif text-6xl">Pedido confirmado!</h1>
         <p className="max-w-md text-ink/70">
-          Sua compra foi realizada com sucesso. Voce receberá um e-mail de confirmação em breve.
+          Sua compra foi realizada com sucesso. Você receberá um e-mail de confirmação em breve.
         </p>
         {orderId ? <p className="text-sm text-ink/50">Pedido <strong>{orderId}</strong></p> : null}
         <Button asChild>

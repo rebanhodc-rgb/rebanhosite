@@ -28,8 +28,8 @@ export default function CarrinhoPage() {
         <h1 className="serif text-6xl">Carrinho</h1>
         {items.length === 0 ? (
           <div className="mt-10 rounded-lg border border-ink/10 bg-white/55 p-8">
-            <p>Seu carrinho esta vazio.</p>
-            <Link href="/loja" className="mt-6 inline-block rounded-full bg-ink px-5 py-3 text-sm font-semibold text-ivory">Ver colecao</Link>
+            <p>Seu carrinho está vazio.</p>
+            <Link href="/loja" className="mt-6 inline-block rounded-full bg-ink px-5 py-3 text-sm font-semibold text-ivory">Ver coleção</Link>
           </div>
         ) : (
           <div className="mt-10 grid gap-8 md:grid-cols-[1fr_360px]">

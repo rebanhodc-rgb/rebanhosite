@@ -50,8 +50,8 @@ export async function updateDonationSettings(
     });
     revalidatePath("/admin/configuracoes");
     revalidatePath("/admin");
-    return { ok: true, message: "Parametros de doacao atualizados." };
+    return { ok: true, message: "Parâmetros de doação atualizados." };
   } catch {
-    return { ok: false, message: "Nao foi possivel salvar. Verifique a conexao com o banco." };
+    return { ok: false, message: "Não foi possível salvar. Verifique a conexão com o banco." };
   }
 }

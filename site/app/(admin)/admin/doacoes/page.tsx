@@ -25,7 +25,7 @@ export default async function AdminDoacoesPage() {
       </div>
       <div className="rounded-lg border border-ink/10 bg-white/65 overflow-hidden">
         {donations.length === 0 ? (
-          <p className="p-6 text-ink/50">Nenhuma doacao registrada ainda.</p>
+          <p className="p-6 text-ink/50">Nenhuma doação registrada ainda.</p>
         ) : (
           <table className="w-full text-sm">
             <thead className="bg-ink/5 text-ink/70">

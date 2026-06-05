@@ -16,8 +16,8 @@ export default function BrandHomePage() {
           </Link>
           <nav className="subtitle hidden items-center gap-12 text-xs font-bold uppercase tracking-[0.2em] lg:flex">
             <Link href="/loja">Loja</Link>
-            <Link href="/proposito">Proposito</Link>
-            <Link href="/experiencia">Experiencia</Link>
+            <Link href="/proposito">Propósito</Link>
+            <Link href="/experiencia">Experiência</Link>
             <Link href="/sobre">Sobre</Link>
             <Link href="/faq">FAQ</Link>
           </nav>
@@ -31,12 +31,12 @@ export default function BrandHomePage() {
 
       <section className="mx-auto grid w-[min(1360px,calc(100%_-_40px))] gap-12 py-14 lg:grid-cols-[0.58fr_0.42fr] lg:items-center">
         <div>
-          <p className="subtitle text-center text-xs font-bold uppercase tracking-[0.28em] text-ink/60 lg:text-left">Colecao</p>
-          <h1 className="serif mt-3 text-center text-6xl leading-tight lg:text-left lg:text-7xl">Pecas que carregam proposito</h1>
+          <p className="subtitle text-center text-xs font-bold uppercase tracking-[0.28em] text-ink/60 lg:text-left">Coleção</p>
+          <h1 className="serif mt-3 text-center text-6xl leading-tight lg:text-left lg:text-7xl">Peças que carregam propósito</h1>
           <p className="subtitle mt-4 text-center text-sm font-bold uppercase tracking-[0.26em] text-ink/56 lg:text-left">Cada detalhe fala sobre aquilo que acreditamos.</p>
           <div className="mx-auto mt-6 h-px w-40 bg-[#ad9169] lg:mx-0" />
           <Link href="/loja" className="subtitle mx-auto mt-8 inline-flex min-h-12 items-center gap-3 rounded-full bg-ink px-6 text-sm font-bold uppercase tracking-[0.14em] text-ivory lg:mx-0">
-            Conheca a colecao <ArrowRight size={17} />
+            Conheça a coleção <ArrowRight size={17} />
           </Link>
         </div>
         <div className="overflow-hidden rounded-lg shadow-[0_24px_70px_rgba(15,26,23,0.2)]">
@@ -55,8 +55,8 @@ export default function BrandHomePage() {
       <section className="border-y border-ink/8 bg-[#eee4d7]">
         <div className="mx-auto grid w-[min(1360px,calc(100%_-_40px))] gap-8 py-10 md:grid-cols-4">
           {[
-            [Leaf, "Significado", "Cada detalhe carrega um proposito."],
-            [Box, "Experiencia", "Mais que uma compra, um momento."],
+            [Leaf, "Significado", "Cada detalhe carrega um propósito."],
+            [Box, "Experiência", "Mais que uma compra, um momento."],
             [Church, "Impacto real", "10% do lucro de cada venda para um dos 3 projetos sociais."],
             [Heart, "Para todos", "Design sutil que fala com todos."]
           ].map(([Icon, title, text]) => (
@@ -75,7 +75,7 @@ export default function BrandHomePage() {
         <div className="mx-auto grid w-[min(1360px,calc(100%_-_40px))] gap-10 md:grid-cols-[1fr_1fr] md:items-center">
           <div>
             <p className="serif text-4xl tracking-[0.16em] text-gold">REBANHO</p>
-            <p className="subtitle mt-3 max-w-md text-sm leading-6 text-ivory/62">A roupa fala por quem a veste. Moda com significado, beleza e missao.</p>
+            <p className="subtitle mt-3 max-w-md text-sm leading-6 text-ivory/62">A roupa fala por quem a veste. Moda com significado, beleza e missão.</p>
           </div>
           <NewsletterForm dark />
         </div>

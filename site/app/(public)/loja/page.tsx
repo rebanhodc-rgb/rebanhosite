@@ -16,7 +16,7 @@ export default function LojaPage() {
       <Navbar />
       <section className="container-x py-14 md:py-20">
         <CircularGallery items={galleryItems} className="mb-16" />
-        <SectionTitle eyebrow="Loja" title="Colecao REBANHO" copy="Pequenas tiragens, acabamento premium e simbolos desenhados para permanecerem discretos." />
+        <SectionTitle eyebrow="Loja" title="Coleção REBANHO" copy="Pequenas tiragens, acabamento premium e símbolos desenhados para permanecerem discretos." />
         <div className="mt-10 grid gap-8 md:grid-cols-3">
           {products.map((product) => <ProductCard key={product.id} product={product} />)}
         </div>

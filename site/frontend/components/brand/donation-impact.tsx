@@ -28,19 +28,19 @@ export function DonationImpact() {
         >
           <div>
             <span className="inline-flex items-center gap-2 rounded-full bg-gold/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-gold">
-              <Receipt size={12} strokeWidth={1.25} /> 10% do lucro liquido
+              <Receipt size={12} strokeWidth={1.25} /> 10% do lucro líquido
             </span>
             <h3 className="serif mt-5 text-[clamp(1.9rem,4vw,2.6rem)] leading-[1.02]">
               Calcule o impacto da sua compra
             </h3>
             <p className="subtitle mt-3 max-w-sm text-sm leading-6 text-ivory/60">
-              A cada pedido, reservamos 10% do lucro liquido — depois de custos, impostos e taxas — para o projeto que voce escolher.
+              A cada pedido, reservamos 10% do lucro líquido — depois de custos, impostos e taxas — para o projeto que você escolher.
             </p>
           </div>
 
           <div className="mt-8">
             <p className="subtitle text-[11px] font-semibold uppercase tracking-[0.22em] text-ivory/45">
-              Quantidade de pecas
+              Quantidade de peças
             </p>
             <div className="mt-3 flex items-center gap-4">
               <div className="flex items-center gap-2 rounded-full bg-ivory/10 p-1 ring-1 ring-ivory/10">
@@ -70,7 +70,7 @@ export function DonationImpact() {
             <div className="mt-7 flex items-end justify-between border-t border-ivory/10 pt-6">
               <div>
                 <p className="subtitle text-[11px] font-semibold uppercase tracking-[0.22em] text-gold/70">
-                  Doacao gerada
+                  Doação gerada
                 </p>
                 <p className="serif mt-1 text-[clamp(2.6rem,7vw,3.6rem)] leading-none text-gold">
                   {brl(breakdown.donation)}
@@ -85,7 +85,7 @@ export function DonationImpact() {
       {/* Projetos beneficiados */}
       <div className="grid gap-4">
         <p className="subtitle text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/45">
-          Para onde vai — voce escolhe no checkout
+          Para onde vai — você escolhe no checkout
         </p>
         {donationProjects.map((project) => (
           <div

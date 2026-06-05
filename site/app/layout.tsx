@@ -23,10 +23,10 @@ const body = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "REBANHO | A roupa fala por quem a veste",
-  description: "Moda catolica premium com significado sutil, experiencia como missao e 10% destinado a comunidades locais.",
+  description: "Moda católica premium com significado sutil, experiência como missão e 10% destinado a comunidades locais.",
   openGraph: {
     title: "REBANHO",
-    description: "Fe sem rotulos. Proposito sem exagero. Moda com significado.",
+    description: "Fé sem rótulos. Propósito sem exagero. Moda com significado.",
     type: "website",
     locale: "pt_BR"
   }

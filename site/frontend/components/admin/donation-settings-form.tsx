@@ -38,7 +38,7 @@ const FIELDS = [
   { name: "taxPercent", label: "Impostos", suffix: "%", step: "0.01" },
   { name: "feePercent", label: "Taxa do gateway", suffix: "%", step: "0.01" },
   { name: "fixedFee", label: "Taxa fixa por venda", suffix: "R$", step: "0.01" },
-  { name: "donationPercent", label: "Doacao do lucro", suffix: "%", step: "0.01" }
+  { name: "donationPercent", label: "Doação do lucro", suffix: "%", step: "0.01" }
 ] as const;
 
 export function DonationSettingsForm({ initial }: Props) {
@@ -63,9 +63,9 @@ export function DonationSettingsForm({ initial }: Props) {
 
   return (
     <div className="rounded-2xl border border-ink/10 bg-white/65 p-6">
-      <h2 className="mb-1 text-xs font-semibold uppercase tracking-wider text-ink/50">Doacao — lucro liquido</h2>
+      <h2 className="mb-1 text-xs font-semibold uppercase tracking-wider text-ink/50">Doação — lucro líquido</h2>
       <p className="mb-5 text-sm text-ink/60">
-        Define como calculamos a doacao: lucro liquido = receita − custo − impostos − taxas, e a doacao e uma fracao desse lucro.
+        Define como calculamos a doação: lucro líquido = receita − custo − impostos − taxas, e a doação é uma fração desse lucro.
       </p>
 
       <form action={formAction} className="grid gap-4 md:grid-cols-2">
@@ -100,7 +100,7 @@ export function DonationSettingsForm({ initial }: Props) {
               <span>Lucro: <strong className="text-ink">{brl(preview.netProfit)}</strong></span>
             </div>
             <p className="mt-3 text-base">
-              Doacao gerada: <strong className="text-copper">{brl(preview.donation)}</strong>
+              Doação gerada: <strong className="text-copper">{brl(preview.donation)}</strong>
             </p>
           </div>
         </div>

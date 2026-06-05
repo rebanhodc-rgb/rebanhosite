@@ -15,7 +15,7 @@ export function NewsletterForm({ dark = false }: { dark?: boolean }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email })
     });
-    setMessage(response.ok ? "Voce esta na lista." : "Nao foi possivel salvar agora.");
+    setMessage(response.ok ? "Você está na lista." : "Não foi possível salvar agora.");
   }
 
   return (

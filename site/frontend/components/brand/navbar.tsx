@@ -13,8 +13,8 @@ export function Navbar({ dark = false }: { dark?: boolean }) {
         </Link>
         <nav className="subtitle hidden items-center gap-7 text-sm font-semibold md:flex">
           <Link href="/loja">Loja</Link>
-          <Link href="/proposito">Proposito</Link>
-          <Link href="/experiencia">Experiencia</Link>
+          <Link href="/proposito">Propósito</Link>
+          <Link href="/experiencia">Experiência</Link>
           <Link href="/sobre">Sobre</Link>
         </nav>
         <div className="flex items-center gap-2">

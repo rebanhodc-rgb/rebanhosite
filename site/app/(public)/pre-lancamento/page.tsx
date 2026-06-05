@@ -7,7 +7,7 @@ export default function PreLancamentoPage() {
         <div>
           <p className="serif text-3xl tracking-[0.2em] text-gold">REBANHO</p>
           <h1 className="serif mt-10 text-6xl leading-[0.95] text-gold md:text-8xl">Nem tudo precisa ser dito para ser entendido.</h1>
-          <p className="subtitle mt-7 max-w-xl text-lg leading-8 text-ivory/70">Uma marca para vestir aquilo que voce acredita, sem precisar explicar.</p>
+          <p className="subtitle mt-7 max-w-xl text-lg leading-8 text-ivory/70">Uma marca para vestir aquilo que você acredita, sem precisar explicar.</p>
           <div className="mt-9">
             <NewsletterForm dark />
           </div>

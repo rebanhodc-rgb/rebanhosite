@@ -6,8 +6,8 @@ import { DonationImpact } from "@/frontend/components/brand/donation-impact";
 import { DonationCard } from "@/frontend/components/brand/donation-card";
 
 export const metadata = {
-  title: "Proposito | REBANHO",
-  description: "10% do lucro liquido de cada peca vai para os Vicentinos, a ABRACE ou o Crevin Lar dos Idosos — voce escolhe."
+  title: "Propósito | REBANHO",
+  description: "10% do lucro líquido de cada peça vai para os Vicentinos, a ABRACE ou o Crevin Lar dos Idosos — você escolhe."
 };
 
 export default function PropositoPage() {
@@ -17,15 +17,15 @@ export default function PropositoPage() {
 
       <section className="container-x pt-16 pb-10 md:pt-24 md:pb-14">
         <span className="inline-flex items-center rounded-full border border-ink/15 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink/60">
-          Proposito
+          Propósito
         </span>
         <h1 className="serif mt-5 max-w-4xl text-[clamp(2.6rem,8vw,5rem)] leading-[0.95]">
-          Vestir tem consequencia. A sua compra vira cuidado.
+          Vestir tem consequência. A sua compra vira cuidado.
         </h1>
         <p className="subtitle mt-6 max-w-2xl text-base leading-7 text-ink/65">
           A REBANHO nasce para evangelizar pela beleza — e para que a beleza retorne em gesto concreto. Por isso reservamos
-          <strong className="text-ink"> 10% do lucro liquido</strong> de cada pedido para tres projetos sociais. Voce decide
-          qual deles a sua peca vai sustentar.
+          <strong className="text-ink"> 10% do lucro líquido</strong> de cada pedido para três projetos sociais. Você decide
+          qual deles a sua peça vai sustentar.
         </p>
       </section>
 
@@ -39,7 +39,7 @@ export default function PropositoPage() {
             Como funciona
           </span>
           <h2 className="serif mt-5 max-w-3xl text-[clamp(2rem,5vw,3.2rem)] leading-tight">
-            Transparencia do valor ate o repasse.
+            Transparência do valor até o repasse.
           </h2>
           <div className="mt-10">
             <div className="rounded-[2rem] bg-ivory/[0.04] p-1.5 ring-1 ring-ivory/10">
@@ -54,7 +54,7 @@ export default function PropositoPage() {
             className="group mt-12 inline-flex items-center gap-3 rounded-full bg-gold px-6 py-3 text-sm font-semibold text-ink transition-transform duration-500 active:scale-[0.98]"
             style={{ transitionTimingFunction: "cubic-bezier(0.32,0.72,0,1)" }}
           >
-            Ver a colecao
+            Ver a coleção
             <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink/10 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-[1px]">
               <ArrowUpRight size={16} strokeWidth={1.5} />
             </span>

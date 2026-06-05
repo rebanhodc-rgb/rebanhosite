@@ -23,7 +23,7 @@ const cards = [
   {
     id: 3,
     title: "A veste",
-    caption: "fe sem rotulos",
+    caption: "fé sem rótulos",
     image: "/images/rebanho-campo-camiseta.png"
   },
   {
@@ -46,16 +46,16 @@ export default function LaunchPage() {
           <Sparkles size={19} className="text-gold" />
           <span className="serif text-xl tracking-[0.18em] text-gold sm:text-2xl lg:text-3xl">REBANHO</span>
         </Link>
-        <span className="subtitle hidden text-xs font-bold uppercase tracking-[0.24em] text-gold/60 md:block">Lancamento em breve</span>
+        <span className="subtitle hidden text-xs font-bold uppercase tracking-[0.24em] text-gold/60 md:block">Lançamento em breve</span>
       </header>
 
       <section className="relative z-10 mx-auto grid h-[calc(100dvh-56px)] w-[min(1240px,calc(100%_-_32px))] items-center gap-5 pb-3 sm:h-[calc(100dvh-64px)] lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.78fr)] lg:gap-14 lg:pb-5">
         <div className="min-w-0">
-          <p className="subtitle text-[10px] font-bold uppercase leading-4 tracking-[0.28em] text-gold/78 sm:text-xs sm:tracking-[0.32em]">Lancamento oficial em 1 de agosto de 2026</p>
+          <p className="subtitle text-[10px] font-bold uppercase leading-4 tracking-[0.28em] text-gold/78 sm:text-xs sm:tracking-[0.32em]">Lançamento oficial em 1 de agosto de 2026</p>
           <h1 className="serif mt-3 max-w-5xl text-[clamp(2.35rem,12vw,4.2rem)] leading-[0.9] tracking-[0.02em] sm:mt-4 sm:text-[clamp(3.2rem,7vw,4.5rem)] lg:mt-4">
-            <LustreText text="Elas ouvirao a minha voz, e havera um so rebanho e um so pastor." />
+            <LustreText text="Elas ouvirão a minha voz, e haverá um só rebanho e um só pastor." />
           </h1>
-          <p className="subtitle mt-3 text-[10px] font-bold uppercase tracking-[0.28em] text-gold/62 sm:text-xs">Joao 10:16</p>
+          <p className="subtitle mt-3 text-[10px] font-bold uppercase tracking-[0.28em] text-gold/62 sm:text-xs">João 10:16</p>
 
           <div className="mt-5 max-w-3xl sm:mt-6 lg:mt-6">
             <LaunchCountdown />

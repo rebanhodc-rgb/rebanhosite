@@ -36,7 +36,7 @@ export function ProductPurchasePanel({ product }: { product: Product }) {
         </div>
         <p className="mt-3 flex gap-2 text-sm text-ink/58">
           <Ruler size={17} className="text-copper" />
-          Guia de medidas disponivel por tamanho.
+          Guia de medidas disponível por tamanho.
         </p>
       </div>
 
