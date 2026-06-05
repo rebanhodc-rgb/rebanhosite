@@ -40,13 +40,17 @@ enum DiscountType {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String   @unique
-  password  String
-  role      UserRole @default(CUSTOMER)
-  createdAt DateTime @default(now())
-  orders    Order[]
+  id                String    @id @default(cuid())
+  name              String?
+  email             String    @unique
+  password          String
+  role              UserRole  @default(CUSTOMER)
+  createdAt         DateTime  @default(now())
+  stripeCustomerId  String?
+  phone             String?
+  cpf               String?
+  addresses         Address[]
+  orders            Order[]
 }
 
 model Lead {
@@ -84,23 +88,35 @@ model ProductVariant {
 }
 
 model Order {
-  id             String        @id @default(cuid())
-  userId         String?
-  customerName   String
-  customerEmail  String
-  customerCPF    String
-  total          Decimal       @db.Decimal(10, 2)
-  donationAmount Decimal       @db.Decimal(10, 2)
-  status         OrderStatus   @default(PENDING)
-  paymentStatus  PaymentStatus @default(PENDING)
-  cep            String
-  city           String
-  state          String
-  parishName     String?
-  createdAt      DateTime      @default(now())
-  user           User?         @relation(fields: [userId], references: [id])
-  items          OrderItem[]
-  donation       Donation?
+  id               String        @id @default(cuid())
+  userId           String?
+  customerName     String
+  customerEmail    String
+  customerCPF      String
+  total            Decimal       @db.Decimal(10, 2)
+  donationAmount   Decimal       @db.Decimal(10, 2)
+  status           OrderStatus   @default(PENDING)
+  paymentStatus    PaymentStatus @default(PENDING)
+  cep              String
+  city             String
+  state            String
+  parishName       String?
+  projectId        String?
+  projectName      String?
+  phone            String?
+  street           String        @default("")
+  number           String        @default("")
+  complement       String?
+  neighborhood     String        @default("")
+  shippingMethod   String?
+  shippingCarrier  String?
+  shippingCost     Decimal?      @db.Decimal(10, 2)
+  shippingDays     Int?
+  trackingCode     String?
+  createdAt        DateTime      @default(now())
+  user             User?         @relation(fields: [userId], references: [id])
+  items            OrderItem[]
+  donation         Donation?
 
   @@index([customerEmail])
   @@index([createdAt])
@@ -124,6 +140,8 @@ model Donation {
   id           String         @id @default(cuid())
   orderId      String         @unique
   amount       Decimal        @db.Decimal(10, 2)
+  projectId    String
+  projectName  String
   parishName   String
   city         String
   state        String
@@ -132,21 +150,19 @@ model Donation {
   createdAt    DateTime       @default(now())
   order        Order          @relation(fields: [orderId], references: [id], onDelete: Cascade)
 
+  @@index([projectId])
   @@index([city, state])
   @@index([status])
 }
 
-model Parish {
-  id            String  @id @default(cuid())
-  name          String
-  city          String
-  state         String
-  cepRangeStart String
-  cepRangeEnd   String
-  active        Boolean @default(true)
-
-  @@index([state, city])
-  @@index([cepRangeStart, cepRangeEnd])
+model DonationSettings {
+  id           String   @id @default("singleton")
+  unitCost     Decimal  @db.Decimal(10, 2)
+  taxRate      Decimal  @db.Decimal(6, 4)
+  feeRate      Decimal  @db.Decimal(6, 4)
+  fixedFee     Decimal  @db.Decimal(10, 2)
+  donationRate Decimal  @db.Decimal(6, 4)
+  updatedAt    DateTime @updatedAt
 }
 
 model Coupon {
@@ -158,4 +174,23 @@ model Coupon {
   expiresAt     DateTime?
 
   @@index([code, active])
+}
+
+model Address {
+  id            String   @id @default(cuid())
+  userId        String
+  label         String
+  recipientName String
+  street        String
+  number        String
+  complement    String?
+  neighborhood  String
+  city          String
+  state         String
+  cep           String
+  isDefault     Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
