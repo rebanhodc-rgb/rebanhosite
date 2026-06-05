@@ -10,7 +10,10 @@ export default async function MeusPedidosPage() {
 
   const orders = await prisma.order.findMany({
     where: { customerEmail: session.user.email },
-    include: { items: { include: { product: true } }, donation: true },
+    include: {
+      items: { include: { product: true } },
+      donation: true
+    },
     orderBy: { createdAt: "desc" }
   });
 
@@ -47,8 +50,35 @@ export default async function MeusPedidosPage() {
               {order.donation && (
                 <p className="mt-2 text-xs text-ink/40">
                   Doação de R$ {Number(order.donation.amount).toFixed(2).replace(".", ",")} para{" "}
-                  {order.donation.parishName}
+                  {order.donation.projectName ?? order.donation.parishName}
                 </p>
+              )}
+              {(order.shippingCarrier || order.trackingCode) && (
+                <div className="mt-2 space-y-0.5">
+                  {order.shippingCarrier && (
+                    <p className="text-xs text-ink/50">
+                      {order.shippingCarrier}
+                      {order.shippingMethod ? ` — ${order.shippingMethod}` : ""}
+                      {order.shippingCost !== null
+                        ? ` · R$ ${Number(order.shippingCost).toFixed(2).replace(".", ",")}`
+                        : ""}
+                      {order.shippingDays ? ` · ${order.shippingDays} dia(s) útil(eis)` : ""}
+                    </p>
+                  )}
+                  {order.trackingCode && (
+                    <p className="text-xs">
+                      Rastreamento:{" "}
+                      <a
+                        href={`https://www.linketrack.com/trace/${order.trackingCode}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium underline"
+                      >
+                        {order.trackingCode}
+                      </a>
+                    </p>
+                  )}
+                </div>
               )}
             </div>
           ))}
