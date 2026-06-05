@@ -1,20 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Check } from "lucide-react";
 import { Navbar } from "@/frontend/components/brand/navbar";
+import { CepFields, type AddressValues } from "@/frontend/components/brand/cep-fields";
+import { ShippingSelector, type ShippingOption } from "@/frontend/components/brand/shipping-selector";
 import { CheckoutStep } from "@/frontend/components/checkout/checkout-step";
 import { Button } from "@/frontend/components/ui/button";
 import { Input } from "@/frontend/components/ui/input";
 import { CartItem, readCart } from "@/frontend/lib/cart";
-import { maskCEP, maskCPF, maskPhone } from "@/frontend/lib/masks";
+import { maskCPF, maskPhone } from "@/frontend/lib/masks";
 import { brl } from "@/shared/utils";
+import { calculateDonationBreakdown } from "@/shared/donation";
+import { DEFAULT_PROJECT_ID, donationProjects } from "@/shared/projects";
+
+const EASE = "cubic-bezier(0.32,0.72,0,1)";
 
 export default function CheckoutPage() {
   const [items, setItems] = useState<CartItem[]>([]);
-  const [form, setForm] = useState({ customerName: "", customerEmail: "", customerCPF: "", phone: "", address: "", cep: "", city: "", state: "" });
+  const [form, setForm] = useState({ customerName: "", customerEmail: "", customerCPF: "", phone: "" });
+  const [address, setAddress] = useState<AddressValues>({
+    cep: "", street: "", number: "", complement: "", neighborhood: "", city: "", state: "",
+  });
+  const [shipping, setShipping] = useState<ShippingOption | null>(null);
+  const [projectId, setProjectId] = useState<string>(DEFAULT_PROJECT_ID);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const cartTotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const quantity = items.reduce((sum, item) => sum + item.quantity, 0);
+  const shippingCost = shipping?.price ?? 0;
+  const displayTotal = cartTotal + shippingCost;
+  const donation = useMemo(() => calculateDonationBreakdown(cartTotal, quantity).donation, [cartTotal, quantity]);
+  const selectedProject = donationProjects.find((project) => project.id === projectId);
 
   useEffect(() => {
     setItems(readCart());
@@ -26,16 +44,30 @@ export default function CheckoutPage() {
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
+
+    if (!shipping) {
+      setError("Selecione um método de envio para continuar.");
+      return;
+    }
+
     setLoading(true);
     setError("");
+
     const response = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...form,
+        ...address,
+        shippingMethod: shipping.name,
+        shippingCarrier: shipping.carrier,
+        shippingCost: shipping.price,
+        shippingDays: shipping.days,
+        projectId,
         items: items.map((item) => ({ productId: item.id, variantId: item.variantId, quantity: item.quantity }))
       })
     });
+
     const json = await response.json();
     if (response.ok && json.checkoutUrl) {
       window.localStorage.removeItem("rebanho-cart");
@@ -60,27 +92,91 @@ export default function CheckoutPage() {
               <Input required placeholder="Telefone" value={form.phone} onChange={(e) => setField("phone", maskPhone(e.target.value))} />
             </div>
           </CheckoutStep>
-          <CheckoutStep number="2" title="Entrega e comunidade">
-            <div className="grid gap-3 md:grid-cols-2">
-              <Input required placeholder="CEP" value={form.cep} onChange={(e) => setField("cep", maskCEP(e.target.value))} />
-              <Input required placeholder="Endereco" value={form.address} onChange={(e) => setField("address", e.target.value)} />
-              <Input required placeholder="Cidade" value={form.city} onChange={(e) => setField("city", e.target.value)} />
-              <Input required placeholder="UF" maxLength={2} value={form.state} onChange={(e) => setField("state", e.target.value.toUpperCase())} />
-            </div>
-            <p className="mt-4 text-sm text-copper">Sua compra ajudara uma comunidade proxima de voce.</p>
+          <CheckoutStep number="2" title="Entrega">
+            <CepFields values={address} onChange={setAddress} />
+
+            {address.cep.replace(/\D/g, "").length === 8 && (
+              <div className="mt-6">
+                <p className="subtitle mb-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink/60">
+                  Método de envio
+                </p>
+                <ShippingSelector
+                  cep={address.cep}
+                  quantity={items.reduce((s, i) => s + i.quantity, 0)}
+                  selected={shipping}
+                  onSelect={setShipping}
+                />
+              </div>
+            )}
           </CheckoutStep>
-          <CheckoutStep number="3" title="Pagamento">
-            <div className="rounded-lg border border-ink/10 p-4 text-sm text-ink/65">Pedido registrado com reserva de doacao e emails transacionais. O gateway de pagamento pode ser conectado nesta etapa.</div>
+          <CheckoutStep number="3" title="Projeto apoiado">
+            <p className="mb-4 text-sm text-ink/60">
+              {brl(donation)} desta compra (10% do lucro liquido) serao destinados ao projeto que voce escolher.
+            </p>
+            <div className="grid gap-3">
+              {donationProjects.map((project) => {
+                const active = project.id === projectId;
+                return (
+                  <button
+                    key={project.id}
+                    type="button"
+                    onClick={() => setProjectId(project.id)}
+                    aria-pressed={active}
+                    className={`flex items-start justify-between gap-4 rounded-2xl border p-4 text-left transition-all duration-500 ${
+                      active ? "border-ink bg-ink/[0.04]" : "border-ink/12 hover:border-ink/40"
+                    }`}
+                    style={{ transitionTimingFunction: EASE }}
+                  >
+                    <span className="flex items-start gap-3">
+                      <span className="mt-1 h-3 w-3 shrink-0 rounded-full" style={{ backgroundColor: project.accent }} />
+                      <span>
+                        <span className="serif block text-lg leading-tight">{project.name}</span>
+                        <span className="block text-xs text-ink/55">{project.cause} · {project.city} — {project.state}</span>
+                      </span>
+                    </span>
+                    <span
+                      className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
+                        active ? "border-ink bg-ink text-ivory" : "border-ink/25 text-transparent"
+                      }`}
+                    >
+                      <Check size={14} strokeWidth={2} />
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </CheckoutStep>
+          <CheckoutStep number="4" title="Pagamento">
+            <div className="rounded-lg border border-ink/10 p-4 text-sm text-ink/65">Pedido registrado com reserva de doacao e emails transacionais. O pagamento seguro e concluido no gateway.</div>
           </CheckoutStep>
         </div>
-        <aside className="order-first rounded-lg border border-ink/10 bg-white/65 p-6 md:order-none md:h-fit md:sticky md:top-24">
+        <aside className="order-first rounded-[1.6rem] border border-ink/10 bg-white/65 p-6 md:order-none md:h-fit md:sticky md:top-24">
           <h2 className="serif text-3xl">Resumo</h2>
           <div className="mt-5 space-y-3 text-sm">
             {items.map((item) => <div key={item.variantId} className="flex justify-between gap-3"><span>{item.quantity}x {item.name} ({item.size})</span><strong>{brl(item.price * item.quantity)}</strong></div>)}
           </div>
-          <div className="mt-6 border-t border-ink/10 pt-5">
-            <div className="flex justify-between"><span>Total</span><strong>{brl(total)}</strong></div>
-            <div className="mt-2 flex justify-between text-copper"><span>Doacao 10%</span><strong>{brl(total * 0.1)}</strong></div>
+          <div className="mt-6 border-t border-ink/10 pt-5 space-y-2">
+            <div className="flex justify-between text-sm">
+              <span>Subtotal</span>
+              <strong>{brl(cartTotal)}</strong>
+            </div>
+            {shippingCost > 0 && (
+              <div className="flex justify-between text-sm text-ink/60">
+                <span>Frete ({shipping?.carrier})</span>
+                <span>{brl(shippingCost)}</span>
+              </div>
+            )}
+            <div className="flex justify-between font-medium pt-1 border-t border-ink/10">
+              <span>Total</span>
+              <strong>{brl(displayTotal)}</strong>
+            </div>
+            <div className="flex justify-between text-copper text-sm">
+              <span>Doacao (10% do lucro)</span>
+              <strong>{brl(donation)}</strong>
+            </div>
+            {selectedProject ? (
+              <p className="text-xs text-ink/55">para {selectedProject.name}</p>
+            ) : null}
           </div>
           <Button type="submit" disabled={loading} className="mt-6 w-full">
             {loading ? "Redirecionando..." : "Finalizar pedido"}

@@ -17,14 +17,30 @@ export async function POST(req: Request) {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       currency: "brl",
-      line_items: checkout.pricedItems.map((item) => ({
-        price_data: {
-          currency: "brl",
-          product_data: { name: item.name },
-          unit_amount: Math.round(item.price * 100),
-        },
-        quantity: item.quantity,
-      })),
+      line_items: [
+        ...checkout.pricedItems.map((item) => ({
+          price_data: {
+            currency: "brl",
+            product_data: { name: item.name },
+            unit_amount: Math.round(item.price * 100),
+          },
+          quantity: item.quantity,
+        })),
+        ...(parsed.data.shippingCost > 0
+          ? [
+              {
+                price_data: {
+                  currency: "brl",
+                  product_data: {
+                    name: `Frete (${parsed.data.shippingCarrier} — ${parsed.data.shippingMethod})`,
+                  },
+                  unit_amount: Math.round(parsed.data.shippingCost * 100),
+                },
+                quantity: 1,
+              },
+            ]
+          : []),
+      ],
       metadata: { orderId: checkout.order.id },
       success_url: `${origin}/checkout/sucesso?orderId=${checkout.order.id}`,
       cancel_url: `${origin}/checkout`,
