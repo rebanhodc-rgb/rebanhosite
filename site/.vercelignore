@@ -1,0 +1,13 @@
+node_modules
+.next
+.env
+.env.local
+.env.*.local
+*.tsbuildinfo
+coverage
+*.log
+docs
+Plans.md
+skills-lock.json
+CLAUDE.md
+README.md
