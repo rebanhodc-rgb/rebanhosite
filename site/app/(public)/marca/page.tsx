@@ -31,12 +31,12 @@ export default function BrandHomePage() {
 
       <section className="mx-auto grid w-[min(1360px,calc(100%_-_40px))] gap-12 py-14 lg:grid-cols-[0.58fr_0.42fr] lg:items-center">
         <div>
-          <p className="subtitle text-center text-xs font-bold uppercase tracking-[0.28em] text-ink/60 lg:text-left">Coleção</p>
-          <h1 className="serif mt-3 text-center text-6xl leading-tight lg:text-left lg:text-7xl">Peças que carregam propósito</h1>
-          <p className="subtitle mt-4 text-center text-sm font-bold uppercase tracking-[0.26em] text-ink/56 lg:text-left">Cada detalhe fala sobre aquilo que acreditamos.</p>
+          <p className="subtitle text-center text-xs font-bold uppercase tracking-[0.28em] text-ink/60 lg:text-left">Coleção manifesto</p>
+          <h1 className="serif mt-3 text-center text-6xl leading-tight lg:text-left lg:text-7xl">Peças para ir ao encontro.</h1>
+          <p className="subtitle mt-4 text-center text-sm font-bold uppercase tracking-[0.26em] text-ink/56 lg:text-left">Evangelizar pela beleza, pela presença e por gestos que ficam.</p>
           <div className="mx-auto mt-6 h-px w-40 bg-[#ad9169] lg:mx-0" />
           <Link href="/loja" className="subtitle mx-auto mt-8 inline-flex min-h-12 items-center gap-3 rounded-full bg-ink px-6 text-sm font-bold uppercase tracking-[0.14em] text-ivory lg:mx-0">
-            Conheça a coleção <ArrowRight size={17} />
+            Vestir o aceno <ArrowRight size={17} />
           </Link>
         </div>
         <div className="overflow-hidden rounded-lg shadow-[0_24px_70px_rgba(15,26,23,0.2)]">
@@ -55,10 +55,10 @@ export default function BrandHomePage() {
       <section className="border-y border-ink/8 bg-[#eee4d7]">
         <div className="mx-auto grid w-[min(1360px,calc(100%_-_40px))] gap-8 py-10 md:grid-cols-4">
           {[
-            [Leaf, "Significado", "Cada detalhe carrega um propósito."],
-            [Box, "Experiência", "Mais que uma compra, um momento."],
-            [Church, "Impacto real", "10% do lucro de cada venda para um dos 3 projetos sociais."],
-            [Heart, "Para todos", "Design sutil que fala com todos."]
+            [Leaf, "Significado", "Cada detalhe carrega um convite: você não está sozinho."],
+            [Box, "Experiência", "Da embalagem ao pós-compra, um gesto de acolhimento."],
+            [Church, "Impacto real", "10% do lucro de cada venda vira cuidado em um dos 3 projetos sociais."],
+            [Heart, "Para todos", "Design sutil para esperar de braços abertos e ir ao encontro."]
           ].map(([Icon, title, text]) => (
             <div key={title as string} className="flex items-center gap-5 border-ink/10 md:border-l md:pl-8 md:first:border-l-0">
               {typeof Icon !== "string" ? <Icon size={40} strokeWidth={1.25} className="text-[#8f7651]" /> : null}
@@ -75,7 +75,7 @@ export default function BrandHomePage() {
         <div className="mx-auto grid w-[min(1360px,calc(100%_-_40px))] gap-10 md:grid-cols-[1fr_1fr] md:items-center">
           <div>
             <p className="serif text-4xl tracking-[0.16em] text-gold">REBANHO</p>
-            <p className="subtitle mt-3 max-w-md text-sm leading-6 text-ivory/62">A roupa fala por quem a veste. Moda com significado, beleza e missão.</p>
+            <p className="subtitle mt-3 max-w-md text-sm leading-6 text-ivory/62">A roupa fala por quem a veste. Um aceno de fé, beleza e missão para o cotidiano.</p>
           </div>
           <NewsletterForm dark />
         </div>

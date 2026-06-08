@@ -11,25 +11,25 @@ const cards = [
   {
     id: 1,
     title: "O sinal",
-    caption: "um detalhe reconhece outro",
+    caption: "um aceno de esperança",
     image: "/images/rebanho-logo-ouro.png"
   },
   {
     id: 2,
     title: "A espera",
-    caption: "nem tudo precisa ser dito",
+    caption: "nós esperamos por você",
     image: "/images/rebanho-frase-misterio.png"
   },
   {
     id: 3,
     title: "A veste",
-    caption: "fé sem rótulos",
+    caption: "fé que encontra o cotidiano",
     image: "/images/rebanho-campo-camiseta.png"
   },
   {
     id: 4,
     title: "O gesto",
-    caption: "10% do lucro para 3 projetos sociais",
+    caption: "evangelizar também é doar",
     image: "/images/rebanho-tipografia-etiqueta.png"
   }
 ];
@@ -46,7 +46,7 @@ export default function LaunchPage() {
           <Sparkles size={19} className="text-gold" />
           <span className="serif text-xl tracking-[0.18em] text-gold sm:text-2xl lg:text-3xl">REBANHO</span>
         </Link>
-        <span className="subtitle hidden text-xs font-bold uppercase tracking-[0.24em] text-gold/60 md:block">Lançamento em breve</span>
+        <span className="subtitle hidden text-xs font-bold uppercase tracking-[0.24em] text-gold/60 md:block">Um aceno em breve</span>
       </header>
 
       <section className="relative z-10 mx-auto grid h-[calc(100dvh-56px)] w-[min(1240px,calc(100%_-_32px))] items-center gap-5 pb-3 sm:h-[calc(100dvh-64px)] lg:grid-cols-[minmax(0,1fr)_minmax(360px,0.78fr)] lg:gap-14 lg:pb-5">
@@ -56,6 +56,9 @@ export default function LaunchPage() {
             <LustreText text="Elas ouvirão a minha voz, e haverá um só rebanho e um só pastor." />
           </h1>
           <p className="subtitle mt-3 text-[10px] font-bold uppercase tracking-[0.28em] text-gold/62 sm:text-xs">João 10:16</p>
+          <p className="mt-4 max-w-2xl text-sm leading-7 text-ivory/72 sm:text-base">
+            Evangelizar não com palavras vazias, mas com gestos que ficam. Cada camiseta é um aceno: você não está sozinho.
+          </p>
 
           <div className="mt-5 max-w-3xl sm:mt-6 lg:mt-6">
             <LaunchCountdown />

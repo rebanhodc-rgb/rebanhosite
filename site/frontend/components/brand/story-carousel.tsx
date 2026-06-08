@@ -9,25 +9,25 @@ const STORIES = [
     id: "sinal",
     title: "O Sinal",
     content:
-      "Nascemos de uma inquietação: a fé que transforma precisa de uma linguagem que alcance o cotidiano. Cada peça é um sinal discreto — uma conversa silenciosa entre quem veste e quem vê.",
+      "Nascemos de uma inquietação: evangelizar não com palavras vazias, mas com gestos que ficam. Cada peça é um sinal discreto — uma conversa silenciosa entre quem veste e quem vê.",
   },
   {
     id: "espera",
     title: "A Espera",
     content:
-      "Há uma beleza singular na espera ativa. Não a estagnação, mas o cultivo paciente de algo maior. REBANHO nasceu nesse espaço — entre o que é e o que pode ser.",
+      "Há uma beleza singular em esperar de braços abertos. REBANHO nasceu nesse espaço: ir ao encontro sem ruído, acolher sem excesso, dizer com presença que ainda há lugar.",
   },
   {
     id: "veste",
     title: "A Veste",
     content:
-      "Cada peça carrega um significado que vai além do tecido. É uma declaração silenciosa, uma escolha intencional de como você se apresenta ao mundo — com fé, com propósito, com beleza.",
+      "Cada camiseta é um aceno. Uma forma silenciosa de dizer: você não está sozinho. Fé, propósito e beleza aparecem como camada profunda — nunca como rótulo.",
   },
   {
     id: "gesto",
     title: "O Gesto",
     content:
-      "Vestir é um gesto de identidade. Quando você escolhe REBANHO, você escolhe pertencer a algo maior — uma comunidade que acredita que a beleza e a fé caminham juntas.",
+      "Vestir também é doar. Quando você escolhe REBANHO, parte do lucro vira cuidado concreto — porque beleza e fé caminham juntas quando alcançam alguém.",
   },
 ];
 

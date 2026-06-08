@@ -15,13 +15,13 @@ export function NewsletterForm({ dark = false }: { dark?: boolean }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email })
     });
-    setMessage(response.ok ? "Você está na lista." : "Não foi possível salvar agora.");
+    setMessage(response.ok ? "Você está na lista. Nós esperamos por você." : "Não foi possível salvar agora.");
   }
 
   return (
     <form onSubmit={submit} className="w-full rounded-lg border border-gold/20 bg-black/25 p-3 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-md sm:p-4">
       <label htmlFor="launch-email" className={`subtitle mb-2 block text-[10px] font-bold uppercase tracking-[0.28em] ${dark ? "text-gold/75" : "text-copper"}`}>
-        Melhor e-mail
+        Entre para a espera
       </label>
       <div className="grid gap-2 sm:gap-3">
         <Input
@@ -34,7 +34,7 @@ export function NewsletterForm({ dark = false }: { dark?: boolean }) {
           className={dark ? "min-h-11 border-gold/20 bg-white/[0.08] px-5 text-ivory placeholder:text-ivory/42 focus:border-gold sm:min-h-12" : "min-h-11 sm:min-h-12"}
         />
         <Button variant={dark ? "gold" : "dark"} type="submit" className="min-h-11 w-full px-4 text-xs sm:min-h-12 sm:text-sm md:min-h-11">
-          Quero fazer parte
+          Receber o primeiro aceno
         </Button>
       </div>
       {message ? <p className={`mt-3 text-sm ${dark ? "text-gold" : "text-copper"}`}>{message}</p> : null}
