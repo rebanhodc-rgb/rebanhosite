@@ -7,10 +7,12 @@ import { ProductPurchasePanel } from "@/frontend/components/product/product-purc
 import { ProductCard } from "@/frontend/components/product/product-card";
 import { InteractiveBook } from "@/frontend/components/product/interactive-book";
 import { brl } from "@/shared/utils";
-import { getProduct, products } from "@/shared/catalog";
+import { getShopProduct, listShopProducts } from "@/backend/services/products";
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
-  const product = getProduct(params.slug);
+export const dynamic = "force-dynamic";
+
+export default async function ProductPage({ params }: { params: { slug: string } }) {
+  const [product, allProducts] = await Promise.all([getShopProduct(params.slug), listShopProducts()]);
   if (!product) notFound();
 
   const bookPages = [
@@ -38,7 +40,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-copper">Significado</p>
             <p className="serif mt-2 text-2xl leading-8">{product.symbolicMeaning}</p>
           </div>
-          <ProductPurchasePanel product={product} />
+          <ProductPurchasePanel product={product} stockBySize={product.stockBySize} />
           <div className="mt-8 grid gap-4 text-sm text-ink/68">
             <p className="flex gap-3"><Truck size={18} className="text-copper" /> Envio calculado no checkout.</p>
             <p className="flex gap-3"><HeartHandshake size={18} className="text-copper" /> 10% do lucro desta compra vai para um dos 3 projetos sociais — você escolhe no checkout.</p>
@@ -56,7 +58,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
       <section className="container-x border-t border-ink/10 py-14">
         <h2 className="serif mb-8 text-4xl">Relacionados</h2>
         <div className="grid gap-8 md:grid-cols-3">
-          {products.filter((item) => item.slug !== product.slug).map((item) => <ProductCard key={item.id} product={item} />)}
+          {allProducts.filter((item) => item.slug !== product.slug).map((item) => <ProductCard key={item.id} product={item} soldOut={item.soldOut} />)}
         </div>
       </section>
       <Footer />

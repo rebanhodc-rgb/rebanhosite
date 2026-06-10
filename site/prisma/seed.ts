@@ -78,6 +78,17 @@ async function main() {
       donationRate: new Prisma.Decimal("0.1000")
     }
   });
+
+  await prisma.coupon.upsert({
+    where: { code: "REBANHO10" },
+    update: {},
+    create: {
+      code: "REBANHO10",
+      discountType: "PERCENTAGE",
+      discountValue: new Prisma.Decimal("10.00"),
+      active: true
+    }
+  });
 }
 
 main()

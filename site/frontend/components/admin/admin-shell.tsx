@@ -10,6 +10,7 @@ export function AdminShell({ title, children }: { title: string; children: React
             <Link href="/admin">Dashboard</Link>
             <Link href="/admin/produtos">Produtos</Link>
             <Link href="/admin/pedidos">Pedidos</Link>
+            <Link href="/admin/cupons">Cupons</Link>
             <Link href="/admin/leads">Leads</Link>
             <Link href="/admin/doacoes">Doacoes</Link>
             <Link href="/admin/configuracoes">Configuracoes</Link>

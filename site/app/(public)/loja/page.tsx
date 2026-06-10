@@ -3,14 +3,17 @@ import { Footer } from "@/frontend/components/brand/footer";
 import { ProductCard } from "@/frontend/components/product/product-card";
 import { SectionTitle } from "@/frontend/components/brand/section-title";
 import { CircularGallery } from "@/frontend/components/product/circular-gallery";
-import { products } from "@/shared/catalog";
+import { listShopProducts } from "@/backend/services/products";
 
-const galleryItems = products.map((p) => ({
-  image: p.images[0],
-  title: p.name,
-}));
+export const dynamic = "force-dynamic";
 
-export default function LojaPage() {
+export default async function LojaPage() {
+  const products = await listShopProducts();
+  const galleryItems = products.map((p) => ({
+    image: p.images[0],
+    title: p.name,
+  }));
+
   return (
     <main>
       <Navbar />
@@ -18,7 +21,7 @@ export default function LojaPage() {
         <CircularGallery items={galleryItems} className="mb-16" />
         <SectionTitle eyebrow="Loja" title="Coleção REBANHO" copy="Pequenas tiragens, acabamento premium e símbolos discretos: cada peça é um aceno de esperança no cotidiano." />
         <div className="mt-10 grid gap-8 md:grid-cols-3">
-          {products.map((product) => <ProductCard key={product.id} product={product} />)}
+          {products.map((product) => <ProductCard key={product.id} product={product} soldOut={product.soldOut} />)}
         </div>
       </section>
       <Footer />

@@ -3,11 +3,16 @@ import { Plus } from "lucide-react";
 import { Product } from "@/shared/catalog";
 import { brl } from "@/shared/utils";
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, soldOut = false }: { product: Product; soldOut?: boolean }) {
   return (
     <Link href={`/produto/${product.slug}`} className="group block overflow-hidden rounded-lg border border-ink/10 bg-[#f5eee3] shadow-[0_18px_45px_rgba(15,26,23,0.14)] transition duration-500 hover:-translate-y-1">
-      <div className="aspect-[1/1.18] overflow-hidden bg-[#ded4c5]">
-        <img src={product.images[0]} alt={product.name} className="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+      <div className="relative aspect-[1/1.18] overflow-hidden bg-[#ded4c5]">
+        <img src={product.images[0]} alt={product.name} className={`h-full w-full object-cover transition duration-700 group-hover:scale-105 ${soldOut ? "opacity-60 grayscale" : ""}`} />
+        {soldOut && (
+          <span className="subtitle absolute left-1/2 top-4 -translate-x-1/2 rounded-full bg-ink/85 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-ivory">
+            Esgotado
+          </span>
+        )}
       </div>
       <div className="px-6 py-6 text-center">
         <h3 className="serif text-2xl uppercase tracking-[0.04em]">{product.name}</h3>

@@ -26,12 +26,20 @@ export default function CheckoutPage() {
   const [projectId, setProjectId] = useState<string>(DEFAULT_PROJECT_ID);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [couponInput, setCouponInput] = useState("");
+  const [coupon, setCoupon] = useState<{ code: string; discount: number } | null>(null);
+  const [couponError, setCouponError] = useState("");
+  const [couponLoading, setCouponLoading] = useState(false);
 
   const cartTotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
   const quantity = items.reduce((sum, item) => sum + item.quantity, 0);
   const shippingCost = shipping?.price ?? 0;
-  const displayTotal = cartTotal + shippingCost;
-  const donation = useMemo(() => calculateDonationBreakdown(cartTotal, quantity).donation, [cartTotal, quantity]);
+  const discount = coupon?.discount ?? 0;
+  const displayTotal = Math.max(0, cartTotal - discount) + shippingCost;
+  const donation = useMemo(
+    () => calculateDonationBreakdown(Math.max(0, cartTotal - discount), quantity).donation,
+    [cartTotal, discount, quantity]
+  );
   const selectedProject = donationProjects.find((project) => project.id === projectId);
 
   useEffect(() => {
@@ -40,6 +48,37 @@ export default function CheckoutPage() {
 
   function setField(name: string, value: string) {
     setForm((current) => ({ ...current, [name]: value }));
+  }
+
+  async function applyCoupon() {
+    const code = couponInput.trim();
+    if (!code) return;
+
+    setCouponLoading(true);
+    setCouponError("");
+    try {
+      const response = await fetch("/api/coupons/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code, subtotal: cartTotal })
+      });
+      const json = await response.json();
+      if (json.valid) {
+        setCoupon({ code: json.code, discount: json.discount });
+        setCouponInput("");
+      } else {
+        setCouponError(json.reason ?? "Cupom inválido.");
+      }
+    } catch {
+      setCouponError("Não foi possível validar o cupom.");
+    } finally {
+      setCouponLoading(false);
+    }
+  }
+
+  function removeCoupon() {
+    setCoupon(null);
+    setCouponError("");
   }
 
   async function submit(event: React.FormEvent) {
@@ -63,6 +102,7 @@ export default function CheckoutPage() {
         shippingCarrier: shipping.carrier,
         shippingCost: shipping.price,
         shippingDays: shipping.days,
+        couponCode: coupon?.code,
         projectId,
         items: items.map((item) => ({ productId: item.id, variantId: item.variantId, quantity: item.quantity }))
       })
@@ -75,7 +115,9 @@ export default function CheckoutPage() {
       return;
     }
     setLoading(false);
-    setError("Não foi possível finalizar: confira os dados e tente novamente.");
+    setError(
+      typeof json.error === "string" ? json.error : "Não foi possível finalizar: confira os dados e tente novamente."
+    );
   }
 
   return (
@@ -155,11 +197,39 @@ export default function CheckoutPage() {
           <div className="mt-5 space-y-3 text-sm">
             {items.map((item) => <div key={item.variantId} className="flex justify-between gap-3"><span>{item.quantity}x {item.name} ({item.size})</span><strong>{brl(item.price * item.quantity)}</strong></div>)}
           </div>
-          <div className="mt-6 border-t border-ink/10 pt-5 space-y-2">
+          <div className="mt-6 border-t border-ink/10 pt-4">
+            {coupon ? (
+              <div className="flex items-center justify-between rounded-full border border-copper/30 bg-copper/[0.06] px-4 py-2 text-sm">
+                <span className="font-semibold uppercase tracking-[0.08em] text-copper">{coupon.code}</span>
+                <button type="button" onClick={removeCoupon} className="text-xs text-ink/55 underline hover:text-ink">
+                  remover
+                </button>
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <Input
+                  placeholder="Cupom de desconto"
+                  value={couponInput}
+                  onChange={(e) => setCouponInput(e.target.value.toUpperCase())}
+                />
+                <Button type="button" variant="outline" disabled={couponLoading || !couponInput.trim()} onClick={applyCoupon}>
+                  {couponLoading ? "..." : "Aplicar"}
+                </Button>
+              </div>
+            )}
+            {couponError ? <p className="mt-2 text-xs text-red-600">{couponError}</p> : null}
+          </div>
+          <div className="mt-4 border-t border-ink/10 pt-5 space-y-2">
             <div className="flex justify-between text-sm">
               <span>Subtotal</span>
               <strong>{brl(cartTotal)}</strong>
             </div>
+            {discount > 0 && (
+              <div className="flex justify-between text-sm text-copper">
+                <span>Desconto ({coupon?.code})</span>
+                <span>−{brl(discount)}</span>
+              </div>
+            )}
             {shippingCost > 0 && (
               <div className="flex justify-between text-sm text-ink/60">
                 <span>Frete ({shipping?.carrier})</span>

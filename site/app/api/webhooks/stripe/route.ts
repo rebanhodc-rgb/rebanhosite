@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import Stripe from "stripe";
-import { prisma } from "@/backend/db/prisma";
 import { sendOrderEmails } from "@/backend/email/order-emails";
+import { cancelUnpaidOrder, markOrderPaid } from "@/backend/services/order-fulfillment";
 
 export async function POST(req: Request) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
@@ -24,45 +24,42 @@ export async function POST(req: Request) {
 
   switch (event.type) {
     case "payment_intent.succeeded":
-      if (orderId) {
-        await prisma.order.update({
-          where: { id: orderId },
-          data: { status: "PAID", paymentStatus: "APPROVED" }
-        });
-      }
+      if (orderId) await markOrderPaid(orderId);
       break;
 
     case "payment_intent.payment_failed":
-      if (orderId) {
-        await prisma.order.update({
-          where: { id: orderId },
-          data: { status: "CANCELED", paymentStatus: "FAILED" }
-        });
-      }
+      if (orderId) await cancelUnpaidOrder(orderId, true);
       break;
+
+    case "checkout.session.expired": {
+      const session = event.data.object as Stripe.Checkout.Session;
+      const sessionOrderId = session.metadata?.orderId;
+      if (sessionOrderId) await cancelUnpaidOrder(sessionOrderId, false);
+      break;
+    }
 
     case "checkout.session.completed": {
       const session = event.data.object as Stripe.Checkout.Session;
       const sessionOrderId = session.metadata?.orderId;
       if (sessionOrderId) {
-        const order = await prisma.order.update({
-          where: { id: sessionOrderId },
-          data: { status: "PAID", paymentStatus: "APPROVED" },
-          include: { items: { include: { product: true } } }
-        });
-        await sendOrderEmails({
-          orderId: order.id,
-          customerName: order.customerName,
-          customerEmail: order.customerEmail,
-          total: Number(order.total),
-          donationAmount: Number(order.donationAmount),
-          projectName: order.projectName ?? order.parishName ?? "",
-          items: order.items.map((item) => ({
-            name: item.product.name,
-            quantity: item.quantity,
-            price: Number(item.price),
-          })),
-        });
+        // markOrderPaid é idempotente: retorna null se o pedido já foi aprovado,
+        // evitando baixa dupla de estoque e e-mails duplicados em reentregas.
+        const order = await markOrderPaid(sessionOrderId);
+        if (order) {
+          await sendOrderEmails({
+            orderId: order.id,
+            customerName: order.customerName,
+            customerEmail: order.customerEmail,
+            total: Number(order.total),
+            donationAmount: Number(order.donationAmount),
+            projectName: order.projectName ?? order.parishName ?? "",
+            items: order.items.map((item) => ({
+              name: item.product.name,
+              quantity: item.quantity,
+              price: Number(item.price),
+            })),
+          });
+        }
       }
       break;
     }

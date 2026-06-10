@@ -21,6 +21,7 @@ export const checkoutSchema = z.object({
   shippingCarrier: z.string().min(1),
   shippingCost: z.number().min(0),
   shippingDays: z.number().int().min(0),
+  couponCode: z.string().trim().max(40).optional(),
   projectId: z.enum(projectIds),
   items: z
     .array(

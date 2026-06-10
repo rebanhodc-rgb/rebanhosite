@@ -113,6 +113,8 @@ model Order {
   shippingCost     Decimal?      @db.Decimal(10, 2)
   shippingDays     Int?
   trackingCode     String?
+  couponCode       String?
+  discountAmount   Decimal?      @db.Decimal(10, 2)
   createdAt        DateTime      @default(now())
   user             User?         @relation(fields: [userId], references: [id])
   items            OrderItem[]

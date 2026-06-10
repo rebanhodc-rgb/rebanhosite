@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/backend/lib/auth";
 import { getOrCreateStripeCustomer } from "@/backend/services/stripe-customer";
-import { createCheckoutOrder } from "@/backend/services/checkout";
+import { CheckoutError, createCheckoutOrder } from "@/backend/services/checkout";
 import { checkoutSchema } from "@/shared/validations/checkout";
 
 export async function POST(req: Request) {
@@ -30,9 +30,23 @@ export async function POST(req: Request) {
       });
     }
 
+    // Cupom aplicado como desconto único na sessão Stripe
+    let stripeDiscounts: { coupon: string }[] | undefined;
+    if (checkout.discount > 0) {
+      const stripeCoupon = await stripe.coupons.create({
+        amount_off: Math.round(checkout.discount * 100),
+        currency: "brl",
+        duration: "once",
+        name: `Cupom ${checkout.couponCode}`
+      });
+      stripeDiscounts = [{ coupon: stripeCoupon.id }];
+    }
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       currency: "brl",
+      expires_at: Math.floor(Date.now() / 1000) + 60 * 60, // 1h para concluir o pagamento
+      ...(stripeDiscounts ? { discounts: stripeDiscounts } : {}),
       line_items: [
         ...checkout.pricedItems.map((item) => ({
           price_data: {
@@ -72,6 +86,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, checkoutUrl: session.url });
   } catch (error) {
+    if (error instanceof CheckoutError) {
+      return NextResponse.json({ error: error.message }, { status: 422 });
+    }
     return NextResponse.json({ error: "Erro no checkout", detail: (error as Error).message }, { status: 500 });
   }
 }
