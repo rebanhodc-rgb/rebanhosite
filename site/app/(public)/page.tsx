@@ -34,7 +34,14 @@ const cards = [
   }
 ];
 
-export default function LaunchPage() {
+function getStaffRedirect(searchParams?: { next?: string | string[] }) {
+  const next = Array.isArray(searchParams?.next) ? searchParams?.next[0] : searchParams?.next;
+  return next?.startsWith("/") && !next.startsWith("//") ? next : "/loja";
+}
+
+export default function LaunchPage({ searchParams }: { searchParams?: { next?: string | string[] } }) {
+  const staffRedirect = getStaffRedirect(searchParams);
+
   return (
     <main className="relative h-dvh overflow-hidden bg-ink text-ivory">
       <img src="/images/rebanho-campo-camiseta.png" alt="" className="absolute inset-0 h-full w-full object-cover opacity-30" />
@@ -66,7 +73,7 @@ export default function LaunchPage() {
 
           <div className="mt-4 grid max-w-3xl gap-3 sm:mt-5 md:grid-cols-[minmax(0,1fr)_300px] md:items-start lg:mt-5 lg:gap-4">
             <NewsletterForm dark />
-            <StaffAccess />
+            <StaffAccess redirectTo={staffRedirect} />
           </div>
 
           <DriftingMarquee className="border-y border-gold/20 bg-ink" />

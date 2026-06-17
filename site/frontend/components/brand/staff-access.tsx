@@ -4,19 +4,26 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 
 const STAFF_CODE = "rebanh026";
+const STAFF_ACCESS_COOKIE = "rebanho_staff_access=granted; path=/; max-age=2592000; SameSite=Lax";
 
-export function StaffAccess() {
+type StaffAccessProps = {
+  redirectTo?: string;
+};
+
+export function StaffAccess({ redirectTo = "/loja" }: StaffAccessProps) {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
 
   function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (code.trim().toLowerCase() !== STAFF_CODE) {
-      setError("Codigo invalido.");
+      setError("Código inválido.");
       return;
     }
-    window.sessionStorage.setItem("rebanho_staff_access", "true");
-    window.location.href = "/marca";
+    window.sessionStorage.setItem("rebanho_staff_access", "granted");
+    window.localStorage.setItem("rebanho_staff_access", "granted");
+    document.cookie = STAFF_ACCESS_COOKIE;
+    window.location.href = redirectTo;
   }
 
   return (
