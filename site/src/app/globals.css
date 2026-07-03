@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta REBANHO */
+  --rb-bone: #f6f3ee;      /* off-white quente (fundo) */
+  --rb-ink: #1a1a18;       /* preto/grafite (texto) */
+  --rb-stone: #8a8378;     /* cinza pedra (secundário) */
+  --rb-gold: #b08d4f;      /* dourado sutil (acento) */
+  --rb-line: #e2dcd2;      /* linhas/bordas */
+
+  --background: var(--rb-bone);
+  --foreground: var(--rb-ink);
+  --font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-bone: var(--rb-bone);
+  --color-ink: var(--rb-ink);
+  --color-stone: var(--rb-stone);
+  --color-gold: var(--rb-gold);
+  --color-line: var(--rb-line);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Tipografia editorial estilo Zara */
+.font-display { font-family: var(--font-display), Georgia, serif; }
+
+.tracking-brand { letter-spacing: 0.18em; }
+
+/* Util: link com underline animado */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.link-underline:hover::after { transform: scaleX(1); transform-origin: left; }
+
+/* Esconde scrollbar em carrosseis */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 24s linear infinite; }
